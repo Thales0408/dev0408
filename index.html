@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -8,29 +7,38 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      text-align: center;
-      margin-top: 80px;
       background-color: #fff0f5;
       color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
     }
     .box {
       background: white;
-      padding: 30px;
-      margin: auto;
-      width: 90%;
-      max-width: 600px;
+      padding: 20px;
+      margin: 20px;
+      width: 100%;
+      max-width: 500px;
       border-radius: 20px;
       box-shadow: 0 0 15px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+    h1, h2, p {
+      margin-top: 0;
     }
     button {
       background-color: #ff69b4;
       color: white;
-      padding: 10px 20px;
+      padding: 12px 20px;
       margin-top: 20px;
       border: none;
       border-radius: 10px;
-      font-size: 16px;
+      font-size: 18px;
       cursor: pointer;
+      width: 100%;
     }
     #final {
       font-size: 24px;
@@ -44,35 +52,33 @@
   <div class="box" id="container">
     <h1>Oi, meu amor!</h1>
     <p>Quero te fazer algumas perguntinhas rápidas...</p>
-    <button onclick="pergunta1()">Vamos lá!</button>
+    <button id="startBtn">Vamos lá!</button>
   </div>
 
   <script>
-    function pergunta1() {
-      const nome = prompt("Qual seu nome, linda?");
+    document.getElementById('startBtn').addEventListener('click', function () {
+      let nome = prompt('Qual seu nome?');
       if (!nome) return;
       document.getElementById('container').innerHTML = `
         <h2>Que nome lindo, ${nome}!</h2>
         <p>Agora me diz... você gosta de surpresas?</p>
-        <button onclick="pergunta2('${nome}')">Sim, claro!</button>
+        <button id="nextBtn">Sim, claro!</button>
       `;
-    }
-
-    function pergunta2(nome) {
-      document.getElementById('container').innerHTML = `
-        <h2>Eu sabia!</h2>
-        <p>Então segura essa última pergunta, ${nome}...</p>
-        <button onclick="mostrarMensagem()">Pode mandar!</button>
-      `;
-    }
-
-    function mostrarMensagem() {
-      document.getElementById('container').innerHTML = `
-        <h2 id="final">Você é o amor da minha vida!</h2>
-        <p>Obrigado por existir, por me fazer sorrir, por ser exatamente quem você é.</p>
-        <p>Te amo mais do que palavras podem dizer.</p>
-      `;
-    }
+      document.getElementById('nextBtn').addEventListener('click', function () {
+        document.getElementById('container').innerHTML = `
+          <h2>Eu sabia!</h2>
+          <p>Então segura essa última pergunta, ${nome}...</p>
+          <button id="finalBtn">Pode mandar!</button>
+        `;
+        document.getElementById('finalBtn').addEventListener('click', function () {
+          document.getElementById('container').innerHTML = `
+            <h2 id="final">Você é o amor da minha vida!</h2>
+            <p>Obrigado por existir, por me fazer sorrir, por ser exatamente quem você é.</p>
+            <p>Te amo mais do que palavras podem dizer.</p>
+          `;
+        });
+      });
+    });
   </script>
 </body>
 </html>
